@@ -1,20 +1,21 @@
 #include <stdio.h>
+#include <math.h>
 
-e_resistance(float, float *);
+int e_resistance(float, float *);
 
-float main()        //Ett test program för att välja E12 resistorer beroende på vilken totalresistans som anges.
+float main()        //Ett test program fÃ¶r att vÃ¤lja E12 resistorer beroende pÃ¥ vilken totalresistans som anges.
 {
-    float resistors[3], orig_resistance=18.0;     //Skriv in ett påhittat värde i variabel orig_resistance som motsvarar det totala resistans värdet.
-    float *res_array;
+    float resistors[3], orig_resistance=0.0;     //Skriv in ett pÃ¥hittat vÃ¤rde i variabel orig_resistance som motsvarar det totala resistans vÃ¤rdet.
+    float *Ptr_resistors;
 
-    res_array = &resistors;     //Tilldelar minnesadress till pekaren res_array
+    Ptr_resistors = &resistors;     //Tilldelar minnesadress till pekaren res_array
 
-    int count = e_resistance(orig_resistance, res_array); //Skickar över minnesadress för resistorerna, ändra variabel "orig_resistance" eller skriv in värdet direkt i funktions anropet
+    int count = e_resistance(orig_resistance, Ptr_resistors); //Skickar Ã¶ver minnesadress fÃ¶r resistorerna, Ã¤ndra variabel "orig_resistance" eller skriv in vÃ¤rdet direkt i funktions anropet
 
     for(int x=0; x < count; x++)
-        printf("Resistor %d: %0.1f\n", x+1, res_array[x]);      //Skriv ut vilka E12 resistanser som valdes
+        printf("Resistor %d: %0.1f\n", x+1, resistors[x]);      //Skriv ut vilka E12 resistanser som valdes
 
-    printf("\ncount = %d", count);      //Skriv ut värdet på count
+    printf("\ncount = %d", count);      //Skriv ut vÃ¤rdet pÃ¥ count
 
     return(0.0);        //Avsluta och retunera 0
 }
@@ -25,8 +26,8 @@ int e_resistance(float orig_resistance, float *res_array)       //Funktionen
     float *picked_values;
     double exponent = 0.0;
 
-    picked_values = res_array;     //pekaren picked_values pekar mot pekare res_array, vilket är resistors arrayen i main...
-    picked_values[0] = 0;          //Initiering och nollställning av minnesvärdena.
+    picked_values = res_array;     //pekaren picked_values pekar mot pekare res_array, vilket Ã¤r resistors arrayen i main...
+    picked_values[0] = 0;          //Initiering och nollstÃ¤llning av minnesvÃ¤rdena.
     picked_values[1] = 0;
     picked_values[2] = 0;
 
@@ -36,19 +37,19 @@ int e_resistance(float orig_resistance, float *res_array)       //Funktionen
         index = 0;
         index_values = 0;
 
-        if(temp_value == 0)     //Om värdet som skickades var noll avsluta och retunera 0
+        if(temp_value == 0)     //Om vÃ¤rdet som skickades var noll avsluta och retunera 0
             return(0);
 
-        while(temp_value != 0)      //Så länge temp_value inte är lika med noll..
+        while(temp_value != 0)      //SÃ¥ lÃ¤nge temp_value inte Ã¤r lika med noll..
         {
-            index++;                //Öka index med 1 och dividera temp_value med 10 för varje repetition.
+            index++;                //Ã–ka index med 1 och dividera temp_value med 10 fÃ¶r varje repetition.
             temp_value /= 10;
         }
-        index--;       //Gå tillbaka ett steg
+        index--;       //GÃ¥ tillbaka ett steg
 
-        if(index > 2)       //Om index har värdet 2 eller mer..
+        if(index > 2)       //Om index har vÃ¤rdet 2 eller mer..
         {
-            exponent = index - 1;       //Ställ exponenten till index-1
+            exponent = index - 1;       //StÃ¤ll exponenten till index-1
             temp_value = res_total;
             temp_value /= pow(10.0, exponent); //1000+ tal
         }
@@ -57,34 +58,34 @@ int e_resistance(float orig_resistance, float *res_array)       //Funktionen
         else
             temp_value = res_total;      //Sub 100 tal
 
-       while(temp_value >= values[index_values])   //Så länge tempvärdet är större eller lika med E12 resistorn öka index_values..
+       while(temp_value >= values[index_values])   //SÃ¥ lÃ¤nge tempvÃ¤rdet Ã¤r stÃ¶rre eller lika med E12 resistorn Ã¶ka index_values..
             index_values++;
 
-        index_values--;     //Gå tillbaka ett steg
+        index_values--;     //GÃ¥ tillbaka ett steg
 
         if(index > 2)
         {
             exponent = index - 1; //Konvertera int -> double
-            temp_value = picked_values[x] = values[index_values] * pow(10.0, exponent); //E12-resistorvärdet beräknas med en tio potens av index värdet.
+            temp_value = picked_values[x] = values[index_values] * pow(10.0, exponent); //E12-resistorvÃ¤rdet berÃ¤knas med en tio potens av index vÃ¤rdet.
         }
         else if(index == 2)
-            temp_value = picked_values[x] = values[index_values] * 10.0;        //Om index värdet är lika med 2..
+            temp_value = picked_values[x] = values[index_values] * 10.0;        //Om index vÃ¤rdet Ã¤r lika med 2..
         else
         {
-            if(res_total >= 8 && res_total < 10)        //Annars om index är mindre än 2... och resistans värdet är större/lika med 8 eller mindre än 10..
+            if(res_total >= 8 && res_total < 10)        //Annars om index Ã¤r mindre Ã¤n 2... och resistans vÃ¤rdet Ã¤r stÃ¶rre/lika med 8 eller mindre Ã¤n 10..
             {
-                picked_values[x] = 10.0;        //Använd en avrundning och kör med en 10 ohms resistor..
+                picked_values[x] = 10.0;        //AnvÃ¤nd en avrundning och kÃ¶r med en 10 ohms resistor..
                 count++;
             }
             else
-                temp_value = picked_values[x] = values[index_values];       //Annars använd E12 resistansen
+                temp_value = picked_values[x] = values[index_values];       //Annars anvÃ¤nd E12 resistansen
         }
 
         count++;
         res_total %= temp_value;
 
-        if(res_total == 0 || res_total <= 7)        //Kvar att göra.. problem om totalresistans värdet som skickas är < 8.. skräpvärden retuneras.
-            break;                                  //Om resistansen resten är mellan 0 eller 7 avfärda värdet...
+        if(res_total == 0 || res_total <= 7)        //Kvar att gÃ¶ra.. problem om totalresistans vÃ¤rdet som skickas Ã¤r < 8.. skrÃ¤pvÃ¤rden retuneras.
+            break;                                  //Om resistansen resten Ã¤r mellan 0 eller 7 avfÃ¤rda vÃ¤rdet...
     }
 
     return(count);      //Retunera komponent antalet...
