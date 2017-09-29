@@ -3,12 +3,12 @@
 
 int e_resistance(float, float *);
 
-float main()        //Ett test program för att välja E12 resistorer beroende på vilken totalresistans som anges.
+int main()        //Ett test program för att välja E12 resistorer beroende på vilken totalresistans som anges.
 {
     float resistors[3], orig_resistance=0.0;     //Skriv in ett påhittat värde i variabel orig_resistance som motsvarar det totala resistans värdet.
     float *Ptr_resistors;
 
-    Ptr_resistors = &resistors;     //Tilldelar minnesadress till pekaren res_array
+    Ptr_resistors = &resistors[0];     //Tilldelar pekaren Ptr.. första minnesadressen för arrayen.
 
     int count = e_resistance(orig_resistance, Ptr_resistors); //Skickar över minnesadress för resistorerna, ändra variabel "orig_resistance" eller skriv in värdet direkt i funktions anropet
 
@@ -17,7 +17,7 @@ float main()        //Ett test program för att välja E12 resistorer beroende p
 
     printf("\ncount = %d", count);      //Skriv ut värdet på count
 
-    return(0.0);        //Avsluta och retunera 0
+    return(0);        //Avsluta och retunera 0
 }
 
 int e_resistance(float orig_resistance, float *res_array)       //Funktionen
@@ -85,7 +85,7 @@ int e_resistance(float orig_resistance, float *res_array)       //Funktionen
         res_total %= temp_value;
 
         if(res_total == 0 || res_total <= 7)        //Kvar att göra.. problem om totalresistans värdet som skickas är < 8.. skräpvärden retuneras.
-            break;                                  //Om resistansen resten är mellan 0 eller 7 avfärda värdet...
+            break;                                  //Om resistansresten är mellan 0 eller 7 avfärda värdet...
     }
 
     return(count);      //Retunera komponent antalet...
