@@ -15,7 +15,7 @@ CLIBFLAGS = -shared -W -o
 #TODO: main.o: main.c main.h
 #TODO: $(CC) $(CFLAGS) main.c main.h
 
-libpower: power.o
+libpower.so: power.o
 	$(CC) $(CLIBFLAGS) libpower.so power.o
 
 power: power.c power.h
@@ -37,4 +37,4 @@ calc: calc.c calc.h
 #sudo cp ./program1 /usr/local/bin/program1
 
 clean:
-	rm -f *.gch *.o *.so *.exe
+	rm -f *.gch *.o *.so *.exe *.out
