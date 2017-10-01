@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-float calc_resistance(int, char, float *);
+#include "calc.h"
 
 int main()     //Ett test program f�r att ber�kna resistansen
 {

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int e_resistance(float, float *);
+#include "libcomponent.h"
 
 int main()        //Ett test program för att välja E12 resistorer beroende på vilken totalresistans som anges.
 {

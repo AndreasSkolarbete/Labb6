@@ -1,19 +1,19 @@
 #include <stdio.h>
+#include <math.h>
 
-float calc_power_i(float, float);
-float calc_power_r(float, float);
+#include "power.h"
 
-void main() //Ett test program för att beräkna vilken effektutveckling som skapas av en krets
+void main() //Ett test program fÃ¶r att berÃ¤kna vilken effektutveckling som skapas av en krets
 {
     float value1=0, value2=0;
 
-    value1 = calc_power_i(20, 100);     //Test värden för calc_power_i
-    value2 = calc_power_r(100, 20);     //Test värden för calc_power_r
+    value1 = calc_power_i(20, 100);     //Test vÃ¤rden fÃ¥r calc_power_i
+    value2 = calc_power_r(100, 20);     //Test vÃ¤rden fÃ¥r calc_power_r
 
-    printf("P1= %0.2f W, P2= %0.2f W", value1, value2);
+    printf("P1=%0.2fW, P2=%0.2fW\n", value1, value2);
 }
 
-float calc_power_i(float current, float voltage)        //Funktions anrop för att beräkna effekten med ampere och spänningen.
+float calc_power_i(float current, float voltage)        //Funktions anrop fÃ¶r att berÃ¤kna effekten med ampere och spÃ¤nningen.
 {
     float P=0;
 
@@ -23,7 +23,7 @@ float calc_power_i(float current, float voltage)        //Funktions anrop för at
 
 }
 
-float calc_power_r(float resistance, float voltage)     //Funktions anrop för att beräkna effekten med resistans och spänningen.
+float calc_power_r(float resistance, float voltage)     //Funktions anrop fÃ¶r att berÃ¤kna effekten med resistans och spÃ¤nningen.
 {
     float P=0;
 

@@ -1,2 +1,5 @@
 *.exe
 *.out
+*.so
+*.o
+*.h.gch
