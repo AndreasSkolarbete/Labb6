@@ -7,14 +7,14 @@ Grupp 149
 - [x] libresistance
 
 - [x] libpower
-- [x] bug: fel decimalantal i uteffekt 
+- [x] bug: fel decimalantal i uteffekt
 
 - [x] libcomponent
- 
+
 - [ ] electrotest
 - [ ] felinmatningar säkrade i electrotest
 
-- [ ] Makefile
+- [x] Makefile
 
 ### Förväntad resultat
 
