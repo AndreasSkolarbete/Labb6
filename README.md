@@ -7,7 +7,7 @@ Grupp 149
 - [x] libresistance
 
 - [x] libpower
-- [ ] bug: fel uteffekt i libpower 
+- [x] bug: fel decimalantal i uteffekt 
 
 - [x] libcomponent
  
