@@ -3,7 +3,7 @@
 
 #include "power.h"
 
-void main() //Ett test program för att beräkna vilken effektutveckling som skapas av en krets
+int main() //Ett test program för att beräkna vilken effektutveckling som skapas av en krets
 {
     float value1=0, value2=0;
 
@@ -11,6 +11,7 @@ void main() //Ett test program för att beräkna vilken effektutveckling som ska
     value2 = calc_power_r(100, 20);     //Test värden får calc_power_r
 
     printf("P1=%0.2fW, P2=%0.2fW\n", value1, value2);
+return 0;
 }
 
 float calc_power_i(float current, float voltage)        //Funktions anrop för att beräkna effekten med ampere och spänningen.
