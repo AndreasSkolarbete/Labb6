@@ -31,9 +31,9 @@ calc: calc.c calc.h
 	$(CC) $(CFLAGS) calc.c calc.h
 
 install: lib
-	cp *.so /usr/lib/
+	sudo cp *.so /usr/lib/
 	$(CC) -Llib $(LIBSGLOBAL) electrotest.c $(LIBSGLOBAL) $(CDEPENDENCIES) -o electrotest
-	cp electrotest /usr/bin/electrotest
+	sudo cp electrotest /usr/bin/electrotest
 
 clean:
 	rm -f *.gch *.o *.so *.exe *.out electrotest
