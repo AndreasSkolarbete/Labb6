@@ -33,11 +33,11 @@ int main()
 	do 
 	{
 		//Fråga efter spänningen
-		printf("Ange spanningskallan i V: ");	//Lägg till felkorrigering
+		printf("Ange spänningskälla i V: ");	//Lägg till felkorrigering
 		scanf("%f", &in_voltage);
 		if (in_voltage < 0)
 		{
-			printf("Fel: Spanningskallan maste ha ett positivt varde\n");
+			printf("Fel: Spänningskällan måste ha ett positivt värde\n");
 		} 
 	}
 	while (in_voltage < 0);
@@ -45,11 +45,11 @@ int main()
 	do
 	{
 		//Kopplings typ
-		printf("\nAnge koppling [S | P]: ");
+		printf("Ange koppling[S | P]: ");
 		scanf("%s", &in_conn);
 		if (in_conn != 'S' && in_conn != 'P') 
 		{
-			printf("Fel: tillatna varden för koppling ar: 'S' och 'P'\n");
+			printf("Fel: tillåtna värden för koppling är: 'S' och 'P'\n");
 		}
 	}
 	while (in_conn != 'S' && in_conn != 'P');
@@ -57,11 +57,11 @@ int main()
 	do
 	{
 		//Antalet resistorer
-		printf("Ange antalet komponenter:");
+		printf("Antal komponenter: ");
 		scanf("%d", &count);
 		if (count <= 0)
 		{
-			printf("Fel: masta finnas minst en komponent");
+			printf("Fel: måsta finnas minst en komponent");
 		}
 	}
 	while (count <= 0);
@@ -73,11 +73,11 @@ int main()
 	{
 		do
 		{
-			printf("\nKomponent %d i ohm: ", x + 1);
+			printf("Komponent %d i ohm: ", x + 1);
 			scanf("%f", &resistorValues[x]);
 			if (resistorValues[x] <= 0)
 			{
-				printf("Fel: komponenten måste ha ett positivt varde.\n");
+				printf("Fel: komponenten måste ha ett positivt värde.\n");
 			}
 		}
 		while (resistorValues[x] <= 0); 
@@ -94,13 +94,13 @@ int main()
 	free(resistorValues);
 
 	//Resultat!
-	printf("Ersattningsresistans: %0.1f ohm\n", ret_e_res);
-	printf("Effekt: %0.2f W\n", ret_power);
-	printf("E12 varden:\n");
+	printf("Ersättningsresistans:\n%0.1f ohm\n", ret_e_res);
+	printf("Effekt:\n%0.2f W\n", ret_power);
+	printf("Ersättningsresistanser i E12-serien kopplade i serie:\n");
 
 	for(int q = 0; q < count; q++)
 	{
-		printf("%0.1f ohm\n", e12Values[q]);
+		printf("%0.0f\n", e12Values[q]);
 	}
 	return(0);
 }
