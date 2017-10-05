@@ -7,8 +7,8 @@ LIBSGLOBAL = /usr/lib/libpower.so /usr/lib/libcomponent.so /usr/lib/libcalc.so
 
 all: electrotest
 
-electrotest: lib
-		$(CC) -Llib $(LIBS) electrotest.c $(LIBS) $(CDEPENDENCIES) -o electrotest
+electrotest: $(LIBS)
+	$(CC) -Llib $(LIBS) electrotest.c $(LIBS) $(CDEPENDENCIES) -o electrotest
 
 lib: $(LIBS)
 
