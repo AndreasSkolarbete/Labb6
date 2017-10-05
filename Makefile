@@ -2,14 +2,15 @@ CC = gcc
 CFLAGS = -c -fPIC
 CDEPENDENCIES = -lm
 CLIBFLAGS = -shared -W -o
-LIBOBJECTS = ./libpower.so ./libcomponent.so ./libcalc.so
+LIBS = ./libpower.so ./libcomponent.so ./libcalc.so
+LIBSGLOBAL = /usr/lib/libpower.so /usr/lib/libcomponent.so /usr/lib/libcalc.so
 
 all: electrotest
 
 electrotest: lib
-		$(CC) -Llib $(LIBOBJECTS) electrotest.c $(LIBOBJECTS) $(CDEPENDENCIES) -o electrotest
+		$(CC) -Llib $(LIBS) electrotest.c $(LIBS) $(CDEPENDENCIES) -o electrotest
 
-lib: $(LIBOBJECTS)
+lib: $(LIBS)
 
 libpower.so: power.o
 	$(CC) $(CLIBFLAGS) libpower.so power.o
@@ -29,8 +30,10 @@ libcalc.so: calc.o
 calc: calc.c calc.h
 	$(CC) $(CFLAGS) calc.c calc.h
 
-#install:
-#sudo cp ./program1 /usr/local/bin/program1
+install: lib
+	cp *.so /usr/lib/
+	$(CC) -Llib $(LIBSGLOBAL) electrotest.c $(LIBSGLOBAL) $(CDEPENDENCIES) -o electrotest
+	cp electrotest /usr/bin/electrotest
 
 clean:
 	rm -f *.gch *.o *.so *.exe *.out electrotest
