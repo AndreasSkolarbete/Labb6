@@ -7,45 +7,83 @@
 
 /*
 Todo:
-Felkorrigering som l�ser av inmatade v�rden, och kontrollerar att dessa �r korrekt syntax.
-G�ras om till ett terminal/meny program med aktiva val av algoritmer?
+Felkorrigering som läser av inmatade värden, och kontrollerar att dessa är korrekt syntax.
+Göras om till ett terminal/meny program med aktiva val av algoritmer?
+Ska inte kunna...
+..ange bokstäver istället för siffror för komponenter/värden.
 */
 
 int main()
 {
-	float *resistorValues;
-	float *ptr_e12values;
+	float *resistorValues = NULL;
+	float *ptr_e12values = NULL;
 	float e12Values[3] = { 0.0f, 0.0f ,0.0f};
-	float input = 0.0f, in_voltage = 0.0f, sumResValue = 0.0f;
-	float ret_e_res = 0.0f, ret_power = 0.0f, ret_calc = 0.0f;
+	float input = 0.0f;
+	float in_voltage = 0.0f;
+	float sumResValue = 0.0f;
+	float ret_e_res = 0.0f;
+	float ret_power = 0.0f;
+	float ret_calc = 0.0f;
 	char in_conn;
 	int count = 0;
 
-	//Pekaren tilldelas m�l
+	//Pekaren tilldelas mål
 	ptr_e12values = &e12Values[0];
 
-	//Fr�ga efter sp�nningen
-	printf("Ange spanningskallan i V: ");	//L�gg till felkorrigering
-	scanf("%f", &in_voltage);
+	do 
+	{
+		//Fråga efter spänningen
+		printf("Ange spanningskallan i V: ");	//Lägg till felkorrigering
+		scanf("%f", &in_voltage);
+		if (in_voltage < 0)
+		{
+			printf("Fel: Spanningskallan maste ha ett positivt varde\n");
+		} 
+	}
+	while (in_voltage < 0);
+	
+	do
+	{
+		//Kopplings typ
+		printf("\nAnge koppling [S | P]: ");
+		scanf("%s", &in_conn);
+		if (in_conn != 'S' && in_conn != 'P') 
+		{
+			printf("Fel: tillatna varden för koppling ar: 'S' och 'P'\n");
+		}
+	}
+	while (in_conn != 'S' && in_conn != 'P');
+	
+	do
+	{
+		//Antalet resistorer
+		printf("Ange antalet komponenter:");
+		scanf("%d", &count);
+		if (count <= 0)
+		{
+			printf("Fel: masta finnas minst en komponent");
+		}
+	}
+	while (count <= 0);
+	
 
-	//Kopplings typ
-	printf("\nAnge koppling [S | P]: ");
-	scanf("%s", &in_conn);
-
-	//Antalet resistorer
-	printf("Ange antalet resistanser:");
-	scanf("%d", &count);
-
-	//Allokera ledigt minne f�r calloc!
+	//Allokera ledigt minne för calloc!
 	resistorValues = (float *) calloc(count, sizeof(float));
-
 	for(int x = 0; x < count; x++)
 	{
-		printf("\nResistor %d varde i Ohm: ", x + 1);
-		scanf("%f", &resistorValues[x]);
+		do
+		{
+			printf("\nKomponent %d i ohm: ", x + 1);
+			scanf("%f", &resistorValues[x]);
+			if (resistorValues[x] <= 0)
+			{
+				printf("Fel: komponenten måste ha ett positivt varde.\n");
+			}
+		}
+		while (resistorValues[x] <= 0); 
 	}
 
-	//Ers�ttningsresistans!
+	//Ersättningsresistans!
 	ret_e_res = calc_resistance(count, in_conn, resistorValues); //float calc_resistance(int count, char conn, float *array)
 
 	//Effekt
@@ -56,12 +94,13 @@ int main()
 	free(resistorValues);
 
 	//Resultat!
-	printf("Ersattningsresistans: %0.1f Ohm\n", ret_e_res);
+	printf("Ersattningsresistans: %0.1f ohm\n", ret_e_res);
 	printf("Effekt: %0.1f W\n", ret_power);
 	printf("E12 varden:\n");
 
 	for(int q = 0; q < count; q++)
-		printf("%0.1f Ohm\n", e12Values[q]);
-
+	{
+		printf("%0.1f ohm\n", e12Values[q]);
+	}
 	return(0);
 }
