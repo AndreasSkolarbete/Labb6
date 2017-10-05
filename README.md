@@ -11,8 +11,8 @@ Grupp 149
 
 - [x] libcomponent
 
-- [ ] electrotest
-- [ ] felinmatningar säkrade i electrotest
+- [x] electrotest
+- [x] felinmatningar säkrade i electrotest
 
 - [x] Makefile
 
