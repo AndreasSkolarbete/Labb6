@@ -2,18 +2,14 @@ CC = gcc
 CFLAGS = -c -fPIC
 CDEPENDENCIES = -lm
 CLIBFLAGS = -shared -W -o
-#OBJECTS = libpower.so #libcomponent.so libcalc.so
+LIBOBJECTS = ./libpower.so ./libcomponent.so ./libcalc.so
 
-#all: program1
+all: electrotest
 
-#program1: $(OBJECTS)
-	#$(CC) $(OBJECTS) -o program1
+electrotest: lib
+		$(CC) -Llib $(LIBOBJECTS) electrotest.c $(LIBOBJECTS) $(CDEPENDENCIES) -o electrotest
 
-#TODO lib: $(OBJECTS)
-#	$(CC) $(OBJECTS) $(CLIBS)
-
-#TODO: main.o: main.c main.h
-#TODO: $(CC) $(CFLAGS) main.c main.h
+lib: $(LIBOBJECTS)
 
 libpower.so: power.o
 	$(CC) $(CLIBFLAGS) libpower.so power.o
@@ -21,14 +17,14 @@ libpower.so: power.o
 power: power.c power.h
 	$(CC) $(CFLAGS) power.c power.h $(CDEPENDENCIES)
 
-#TODO: libcomponent: libcomponent.o
-#TODO: $(CC) $(CLIBFLAGS) libcomponent.so libcomponent.o
+libcomponent.so: libcomponent.o
+	$(CC) $(CLIBFLAGS) libcomponent.so libcomponent.o
 
-component: libcomponent.c libcomponent.h
+libcomponent: libcomponent.c libcomponent.h
 	$(CC) $(CFLAGS) libcomponent.c libcomponent.h $(CDEPENDENCIES)
 
-#TODO: libcalc: libcalc.o
-#TODO	$(CC) $(CLIBFLAGS) libcalc.so libcalc.o
+libcalc.so: calc.o
+	$(CC) $(CLIBFLAGS) libcalc.so calc.o
 
 calc: calc.c calc.h
 	$(CC) $(CFLAGS) calc.c calc.h
@@ -37,4 +33,4 @@ calc: calc.c calc.h
 #sudo cp ./program1 /usr/local/bin/program1
 
 clean:
-	rm -f *.gch *.o *.so *.exe *.out
+	rm -f *.gch *.o *.so *.exe *.out electrotest
