@@ -95,7 +95,7 @@ int main()
 
 	//Resultat!
 	printf("Ersattningsresistans: %0.1f ohm\n", ret_e_res);
-	printf("Effekt: %0.1f W\n", ret_power);
+	printf("Effekt: %0.2f W\n", ret_power);
 	printf("E12 varden:\n");
 
 	for(int q = 0; q < count; q++)
