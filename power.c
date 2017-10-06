@@ -20,15 +20,23 @@ float calc_power_i(float current, float voltage)        //Funktions anrop för a
 
     P = current * voltage; //P = I * U
 
-    return(P);
+    return P;
 
 }
 
 float calc_power_r(float resistance, float voltage)     //Funktions anrop för att beräkna effekten med resistans och spänningen.
 {
     float P=0;
-
+	
+	
     P = pow(voltage, 2) / resistance;     //P = U^2/R
-
-    return(P);
+	
+	/*
+	// Debug help
+	printf("\n\ncalc_power_r resistance:%.6f", resistance);
+	printf("\ncalc_power_r voltage:%.6f", voltage);
+	printf("\ncalc_power_r P:%.6f\n", P);
+	*/
+	
+    return P;
 }
